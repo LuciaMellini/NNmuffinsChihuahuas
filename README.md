@@ -1,4 +1,4 @@
-# Muffin vs Chihuahua NN
+# Distinguishing muffins and Chihuahuas with NNs
 The aim of this project is to train a neural network for the binary classification of muffins and Chihuahuas based on the images contained in the relative [Kaggle dataset](https://www.kaggle.com/datasets/samuelcortinhas/muffin-vs-chihuahua-image-classification).
 
 ## Contents

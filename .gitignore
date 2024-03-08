@@ -1,2 +1,11 @@
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.gz
+*.toc
+
 *.jpg
 *.zip
+main.py
