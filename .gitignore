@@ -1,3 +1,4 @@
+#LaTeX
 *.aux
 *.fdb_latexmk
 *.fls
@@ -6,6 +7,8 @@
 *.gz
 *.toc
 
+
+*.png
 *.jpg
 *.zip
 main.py
