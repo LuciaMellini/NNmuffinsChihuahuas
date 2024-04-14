@@ -1,0 +1,7 @@
+\setcounter{section}{-1}
+\section{Introduction}\label{0:introduction}
+In this report we analyze the methods and the tools used to perform the binary classification of images of muffins and Chihuahuas based on the data contained in the chosen Kaggle dataset\footnote{https://www.kaggle.com/datasets/samuelcortinhas/muffin-vs-chihuahua-image-classification}. 
+
+In Section~\ref{1_preProcessing} we list the pre-processing steps that have been applied to the images in the training and test sets. We then dive into the methods that have been applied to solve the classification problem at hand. In particular, in Section~\ref{2_models} we show the various neural network hypermodels that have been chosen. Secondarily we fix the baseline models that have been determined by choosing the hyperparameters according to the best ones found by a tuner. We then evaluate the quality of the models (Section~\ref{3_evaluation}) by looking at their risk with respect to the zero-one loss. We estimate this measure through $5$-fold cross validation. We use these values to discuss the best performing hypermodel, and to try and motivate why the tuner had settled for the chosen hyperparameters.
+
+For the construction, training and testing we have chosen the Keras tool\footnote{https://keras.io/}.
