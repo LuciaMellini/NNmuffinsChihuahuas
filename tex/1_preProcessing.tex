@@ -1,1 +1,8 @@
 \section{Data pre-processing}\label{1_preProcessing}
+In this section we list the pre-processing pipeline that has been applied to the training and test set already supplied by Kaggle.
+
+\paragraph{Remove badly encoded images}
+We remove all the images that are badly encoded. We do this by simply trying to open the image and verifying that the file is not broken. At this scope we have used the \texttt{verify} method of the \texttt{Image} object made available by the \texttt{PIL}(Python Imaging Library) package. Citing the documentation this method \textit{attempts to determine if the file is broken, without actually decoding the image data. If this method finds any problems, it raises suitable exceptions}.
+
+\paragraph{Data augmentation}
+To make the dataset more expressive and avoid overfitting, we have applied random changes to the images. It would also be possible to enlarge the size of the dataset by introducing new images created through these transformations, but we have chosen to not add images for efficiency reasons during the training and evaluation stages. We randomly flip the pictures according to their vertical axes, and/or we randomly rotate them of an angle in the range $\left[-20\% \cdot 2\pi, 20\% \cdot 2\pi\right]$.
