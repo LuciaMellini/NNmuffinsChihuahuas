@@ -1,8 +1,12 @@
-\documentclass{report}
+\documentclass{article}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[margin=1.2in]{geometry}
 \usepackage[hidelinks]{hyperref}
+\usepackage[justification=centering]{caption}
+\usepackage{graphicx, subcaption}
+\captionsetup{subrefformat=parens}
+
 
 \begin{document}
 \title{\huge{Distinguishing muffins and Chihuahuas with NNs}\\
@@ -14,6 +18,9 @@
 
 \tableofcontents
 
-\include{tex/1_introduction}
+\include{tex/0_introduction}
+\include{tex/1_preProcessing}
+\include{tex/2_models}
+\include{tex/3_evaluation}
 
 \end{document}
