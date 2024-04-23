@@ -5,11 +5,13 @@
 *.log
 *.out
 *.gz
+*.pdf
 *.toc
 
 project-checkpoint.ipynb
-settings.json
+
 *.png
 *.jpg
 *.zip
-main.py
+*.json
+checkpoint*
