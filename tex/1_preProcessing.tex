@@ -2,18 +2,16 @@
 In this section we list the pre-processing pipeline that has been applied to the training and test set already supplied by Kaggle.
 
 \paragraph{Remove badly encoded images}
-We remove all the images that are badly encoded. We do this by simply trying to open the image and verifying that the file is not broken. At this scope we have used the \texttt{verify} method of the \texttt{Image} object made available by the \texttt{PIL}(Python Imaging Library) package. Citing the documentation this method \textit{attempts to determine if the file is broken, without actually decoding the image data. If this method finds any problems, it raises suitable exceptions}.
+We remove all the images that are badly encoded. We do this by simply trying to open the image and verifying that the file is not broken. At this scope we have used the \texttt{verify} method of the \texttt{Image} object made available by the \texttt{PIL}(Python Imaging Library) package. Citing  this method attempts to determine if the file is broken, without actually decoding the image data. If this method finds any problems, it raises suitable exceptions\cite{PILImageverify}.
 
 \paragraph{Simplifying the image samples}
 To make training easier and more efficient we have considered the images in grayscale instead of RGB, so reducing the number of channels that describe a sample from 3 to 1. For the same reason we have reduced the dimensions of all pictures by rescaling them to the size $\left(64,64\right)$. This size has been chosen to balance the need of having a good resolution to recognize the digits and the need of having a small size to make the training process faster. We have chosen to apply these modifications to the training set and the test set instead of inserting this step at the beginning of the training process to avoid a computational overhead during model execution.
 
 \paragraph{Data augmentation}
-To make the dataset more expressive we have applied random changes to the images to reduce overfitting when choosing the hyperparameters for the models. We apply the transormations listed in tableWe randomly flip the pictures according to their vertical axes, and/or we randomly rotate them of an angle in the range $\left[-20\% \cdot 2\pi, 20\% \cdot 2\pi\right]$.
+To make the dataset more expressive we have applied random changes to the images to reduce overfitting when choosing the hyperparameters for the models. In particular, we apply the transformations listed in Table~\ref{tab:dataAugmentation}.
 
 \begin{table}[h]
     \centering
-    \caption{Data augmentation transformations}
-    \label{tab:dataAugmentation}
     \begin{tabular}{ll}
         \textbf{transformation} & \textbf{range} \\
         \midrule
@@ -24,6 +22,8 @@ To make the dataset more expressive we have applied random changes to the images
         \textsl{zoom\_range} & $\left[80\%, 120\%\right]$ \\
         \textsl{horizontal\_flip} & \{True, False\} \\
     \end{tabular}
+    \caption{Data augmentation transformations}
+    \label{tab:dataAugmentation}
 \end{table}
 
 As one can notice the images are altered slightly, and in realistic ways, e.g. a picture of an upside down dog would not make much sense.
