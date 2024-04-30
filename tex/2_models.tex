@@ -78,11 +78,15 @@ After having outlined the structure of the neural networks we have chosen the hy
    
 To do this we use the \textit{keras\_tuner} library \cite{omalley2019kerastuner}, to carry out hyperparameter tuning. It allows to build a \textit{Tuner} object based on a compiled Keras model that has as argument a \textit{Hyperparameter} object. Such a tuner can then search for the best possible hyperparameters for the model and value domains that have been supplied. 
 
-For efficiency reasons we have opted for a random search in the hyperparameter space, in fact we have carried out only 100 trials, so only a portion of the combinations of hyperparameters has been be evaluated. Also, with have limited the number of training epochs to 10.
+For efficiency reasons we have opted for a random search in the hyperparameter space, in fact we have carried out only $200$ trials, so only a portion of the combinations of hyperparameters has been be evaluated. Also, with have limited the number of training epochs to 10.
 
 During the tuning process we have adopted two different approaches. In the first case we have trained the models with a given set of hyperparameters using the original training set. In the second case, to avoid having hyperparameters too dependent on the dataset we have used an augmented version of the training set. Specifically, we have applied a random alteration to each of the images in each epoch of training according to the possible transformations described in Table~\ref{tab:dataAugmentation}. For each of the two methods we have trained the models with a certain set of hyperparameters with respect to the binary cross-entropy loss. We have then chosen the best hyperparameters measured against the accuracy of the validation set, that has been observed to be at least $0.85$. 
 
 We display the selected hyperparameters of each of the hypermodels in Tables~\ref{tab:chosenHyperparameters}\subref{tab:chosenHyperparameters_tuners} and~\ref{tab:chosenHyperparameters}\subref{tab:chosenHyperparameters_tuners_augmented}.
+
+
+
+
 
 \begin{table}
     \begin{subtable}{\textwidth}\
@@ -90,16 +94,16 @@ We display the selected hyperparameters of each of the hypermodels in Tables~\re
         \begin{tabular}{lcccc}
             \small\textbf{parameter} & \textit{Hypermodel\_1} & \textit{Hypermodel\_2} & \textit{Hypermodel\_3} & \textit{Hypermodel\_4} \\
             \midrule
-            \texttt{filters\_1} & 64 & 32 & 64 & 16 \\
-            \texttt{kernel\_size\_1} & 4 & 4 & 5 & 4 \\
-            \texttt{pool\_size\_1} & 3 & 3 & 3 & 2 \\
-            \texttt{filters\_2} & 16 & 16 & 16 & 32 \\
-            \texttt{kernel\_size\_2} & 4 & 4 & 5 & 5 \\
-            \texttt{pool\_size\_2} & 3 & 4 & 3 & 2 \\
-            \texttt{units} & - & 32 & - & 32 \\
-            \textbf{filters\_3} & - & - & 64 & 32 \\
-            \texttt{kernel\_size\_3} & - & - & 5 & 3 \\
-            \texttt{pool\_size\_3} & - & - & 4 & 2 \\
+            \texttt{filters\_1}         & 32 & 16 & 64 & 16 \\
+            \texttt{kernel\_size\_1}    & 3 & 3 & 5 & 4 \\
+            \texttt{pool\_size\_1}      & 3 & 2 & 4 & 4 \\
+            \texttt{filters\_2}         & 64 & 64 & 64 & 64 \\
+            \texttt{kernel\_size\_2}    & 3 & 5 & 4 & 4 \\
+            \texttt{pool\_size\_2}      & 3 & 4 & 2 & 3 \\
+            \texttt{units}              & - & 32 & - & 64 \\
+            \textbf{filters\_3}         & - & - & 64 & 32 \\
+            \texttt{kernel\_size\_3}    & - & - & 4 & 5 \\
+            \texttt{pool\_size\_3}      & - & - & 3 & 3 \\
         \end{tabular}
         \subcaption{Original training set}
         \label{tab:chosenHyperparameters_tuners}
@@ -111,16 +115,16 @@ We display the selected hyperparameters of each of the hypermodels in Tables~\re
         \begin{tabular}{lcccc}
             \small\textbf{parameter} & \textit{Hypermodel\_1} & \textit{Hypermodel\_2} & \textit{Hypermodel\_3} & \textit{Hypermodel\_4} \\
             \midrule
-            \texttt{filters\_1} & 64 & 32 & 64 & 16 \\
-            \texttt{kernel\_size\_1} & 4 & 4 & 5 & 4 \\
-            \texttt{pool\_size\_1} & 3 & 3 & 3 & 2 \\
-            \texttt{filters\_2} & 16 & 16 & 16 & 32 \\
-            \texttt{kernel\_size\_2} & 4 & 4 & 5 & 5 \\
-            \texttt{pool\_size\_2} & 3 & 4 & 3 & 2 \\
-            \texttt{units} & - & 32 & - & 32 \\
-            \textbf{filters\_3} & - & - & 64 & 32 \\
-            \texttt{kernel\_size\_3} & - & - & 5 & 3 \\
-            \texttt{pool\_size\_3} & - & - & 4 & 2 \\
+            \texttt{filters\_1}         & 64 & 32 & 32 & 64 \\
+            \texttt{kernel\_size\_1}    & 5 & 3 & 5 & 5 \\
+            \texttt{pool\_size\_1}      & 2 & 2 & 2 & 3 \\
+            \texttt{filters\_2}         & 64 & 64 & 32 & 64 \\
+            \texttt{kernel\_size\_2}    & 3 & 4 & 5 & 4 \\
+            \texttt{pool\_size\_2}      & 4 & 4 & 2 & 4 \\
+            \texttt{units}              & - & 64 & - & 32 \\
+            \textbf{filters\_3}         & - & - & 64 & 16 \\
+            \texttt{kernel\_size\_3}    & - & - & 5 & 4 \\
+            \texttt{pool\_size\_3}      & - & - & 3 & 3 \\
         \end{tabular}
         \subcaption{Augmented training set}
         \label{tab:chosenHyperparameters_tuners_augmented}
