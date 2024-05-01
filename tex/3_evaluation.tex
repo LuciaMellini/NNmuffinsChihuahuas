@@ -1,61 +1,20 @@
 \section{Evaluation of the models}\label{3_evaluation}
 In this section we evaluate the various neural networks according to their risk with respect to zero-one loss. We will estimate such measure using $5$-fold cross validation. We have chosen to round the predicted labels in $\left[0,1\right]$ to the nearest digit.
 
-To have a broader view on the quality of the models we have carried out cross validation on the original dataset, formed by training, validation and test set, and a dataset composed only by training and test set. In fact, seen that the validation set has been used to score the best hyperparameters for each of the models, one expects that the risk of the predictor would be higher seen that it has been calibrated on the validation set. 
+To have a broader view on the quality of the models we have carried out cross validation on the original dataset, formed by training, validation and test sets, and a dataset composed only by the training and test sets. In fact, seen that the validation set has been used to score the best hyperparameters for each of the models, one expects that the risk of the predictor would be higher seen that it has been calibrated on the validation set. 
 
-We evaluate according to both the risk estimation versions the models obtained by setting the hyperparameters according to the best values extracted by training on the original dataset and the augmented one. All the results are gathered in Table~\ref{tab:riskEstimates}.
-\begin{table}
-    \begin{subtable}{\textwidth}
-        \centering
-        \begin{tabular}{cccc}        
-            \textit{model\_1} &\textit{model\_2} & \textit{model\_3} & \textit{model\_4} \\
-            \midrule
-            0.185902 & 0.232737 & 0.187934 & 0.290220
-        \end{tabular}
-        \subcaption{Original dataset - without data augmentation}
-        \label{tab:riskEst_originalDataset_withoutAug}
-    \end{subtable}
-    \bigbreak
-    \begin{subtable}{\textwidth}
-        \centering
-        \begin{tabular}{cccc}        
-            \textit{model\_1} &\textit{model\_2} & \textit{model\_3} & \textit{model\_4} \\
-            \midrule            
-            0.195198 & 0.174581 & 0.178637 & 0.183877
-        \end{tabular}
-        \subcaption{Original dataset - with data augmentation}
-        \label{tab:riskEst_originalDataset_withAug}
-    \end{subtable}
-    \bigbreak
-    \bigbreak
-    \begin{subtable}{\textwidth}
-        \centering
-        \begin{tabular}{cccc}        
-            \textit{model\_1} &\textit{model\_2} & \textit{model\_3} & \textit{model\_4} \\
-            \midrule            
-            0.093892 & 0.458927 & 0.127285 & 0.458927
-        \end{tabular}
-        \subcaption{Dataset without validation set - without data augmentation}
-        \label{tab:riskEst_datasetWithoutVal_withoutAug}
-    \end{subtable}\bigbreak
-    \begin{subtable}{\textwidth}
-        \centering
-        \begin{tabular}{cccc}        
-            \textit{model\_1} &\textit{model\_2} & \textit{model\_3} & \textit{model\_4} \\
-            \midrule            
-            0.097869 & 0.458927 & 0.129812 & 0.408024
-        \end{tabular}
-        \subcaption{Dataset without validation set - with data augmentation}
-        \label{tab:riskEst_datasetWithoutVal_withAug}
-    \end{subtable}
+We evaluate according to both the risk estimation versions the models obtained by setting the hyperparameters according to the best values extracted by training on the original dataset and the augmented one (see Section~\ref{hyperparameter_tuning}). All the results are gathered in Table~\ref{tab:riskEstimates}.
 
-    \caption{Risk estimates computed through $5$-fold cross validation}
-    \label{tab:riskEstimates}
-\end{table}
+\input{tex/tables/riskEstimates}
 
 \subsection{Original dataset}
+In this section we look at the risk estimations found by carrying out $5$-fold cross validation on the original dataset, composed by the training, test and validation sets. 
 \subsubsection{Without data augmentation}
+We note that
+
 \subsubsection{With data augmentation}
+
 \subsection{Dataset without validation set}
+In this section we look at the risk estimations found by carrying out $5$-fold cross validation on the images in the traning and test set. 
 \subsubsection{Without data augmentation}
 \subsubsection{With data augmentation}

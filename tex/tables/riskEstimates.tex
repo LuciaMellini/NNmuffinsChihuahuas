@@ -1,0 +1,44 @@
+\begin{table}
+    \begin{subtable}{\textwidth}
+        \centering
+        \begin{tabular}{cccc}        
+            \textsl{Model 1} & \textsl{Model 2} & \textsl{Model 3} & \textsl{Model 4} \\
+            \midrule
+            0.185902 & 0.232737 & 0.187934 & 0.290220
+        \end{tabular}
+    \end{subtable}
+    \bigbreak
+    \begin{subtable}{\textwidth}
+        \centering
+        \begin{tabular}{cccc}        
+            \textsl{Model\_aug 1} & \textsl{Model\_aug 2} & \textsl{Model\_aug 3} & \textsl{Model\_aug 4} \\
+            \midrule            
+            0.195198 & 0.174581 & 0.178637 & 0.183877
+        \end{tabular}
+        \subcaption{Original dataset}
+        \label{tab:riskEst_originalDataset}
+    \end{subtable}
+    \bigbreak
+    \bigbreak
+    \begin{subtable}{\textwidth}
+        \centering
+        \begin{tabular}{cccc}        
+            \textsl{Model 1} & \textsl{Model 2} & \textsl{Model 3} & \textsl{Model 4} \\
+            \midrule            
+            0.093892 & 0.458927 & 0.127285 & 0.458927
+        \end{tabular}
+    \end{subtable}\bigbreak
+    \begin{subtable}{\textwidth}
+        \centering
+        \begin{tabular}{cccc}        
+            \textsl{Model\_aug 1} & \textsl{Model\_aug 2} & \textsl{Model\_aug 3} & \textsl{Model\_aug 4} \\
+            \midrule            
+            0.097869 & 0.458927 & 0.129812 & 0.408024
+        \end{tabular}
+        \subcaption{Dataset without validation set}
+        \label{tab:riskEst_datasetWithoutVal}
+    \end{subtable}
+
+    \caption{Risk estimates computed through $5$-fold cross validation}
+    \label{tab:riskEstimates}
+\end{table}

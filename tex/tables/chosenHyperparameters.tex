@@ -1,0 +1,44 @@
+\begin{table}
+    \begin{subtable}{\textwidth}\
+        \centering
+        \begin{tabular}{lcccc}
+            \textbf{parameter} & \textsl{Model 1} & \textsl{Model 2} & \textsl{Model 3} & \textsl{Model 4} \\
+            \midrule
+            \texttt{filters\_1}         & 32 & 16 & 64 & 16 \\
+            \texttt{kernel\_size\_1}    & 3 & 3 & 5 & 4 \\
+            \texttt{pool\_size\_1}      & 3 & 2 & 4 & 4 \\
+            \texttt{filters\_2}         & 64 & 64 & 64 & 64 \\
+            \texttt{kernel\_size\_2}    & 3 & 5 & 4 & 4 \\
+            \texttt{pool\_size\_2}      & 3 & 4 & 2 & 3 \\
+            \texttt{units}              & - & 32 & - & 64 \\
+            \textbf{filters\_3}         & - & - & 64 & 32 \\
+            \texttt{kernel\_size\_3}    & - & - & 4 & 5 \\
+            \texttt{pool\_size\_3}      & - & - & 3 & 3 \\
+        \end{tabular}
+        \subcaption{Original training set}
+        \label{tab:chosenHyperparameters_tuners}
+    \end{subtable}
+    \bigbreak
+    \bigbreak
+    \begin{subtable}{\textwidth}
+        \centering
+        \begin{tabular}{lcccc}
+            \textbf{parameter} & \textsl{Model\_aug 1} & \textsl{Model\_aug 2} & \textsl{Model\_aug 3} & \textsl{Model\_aug 4} \\
+            \midrule
+            \texttt{filters\_1}         & 64 & 32 & 32 & 64 \\
+            \texttt{kernel\_size\_1}    & 5 & 3 & 5 & 5 \\
+            \texttt{pool\_size\_1}      & 2 & 2 & 2 & 3 \\
+            \texttt{filters\_2}         & 64 & 64 & 32 & 64 \\
+            \texttt{kernel\_size\_2}    & 3 & 4 & 5 & 4 \\
+            \texttt{pool\_size\_2}      & 4 & 4 & 2 & 4 \\
+            \texttt{units}              & - & 64 & - & 32 \\
+            \textbf{filters\_3}         & - & - & 64 & 16 \\
+            \texttt{kernel\_size\_3}    & - & - & 5 & 4 \\
+            \texttt{pool\_size\_3}      & - & - & 3 & 3 \\
+        \end{tabular}
+        \subcaption{Augmented training set}
+        \label{tab:chosenHyperparameters_tuners_augmented}
+    \end{subtable}   
+    \caption{Chosen hyperparameters for each hypermodel}    
+    \label{tab:chosenHyperparameters}
+\end{table}

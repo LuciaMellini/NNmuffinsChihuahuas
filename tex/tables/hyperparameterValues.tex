@@ -1,0 +1,23 @@
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ll}
+        \textbf{hyperparameter} & \textbf{values}\\
+        \midrule
+        \\
+        \multicolumn{2}{c}{convolutional layers (type \textit{Conv2D})} \\
+        \cmidrule(l{10pt}r{10pt}){1-2} 
+        number of filters & $\left\{16, 32, 64\right\}$ \\
+        size of the kernels (square in shape) & $\left\{3, 4, 5\right\}$\\
+        \\
+        \multicolumn{2}{c}{max pooling layers (type \textit{MaxPooling2D})
+        } \\
+        \cmidrule(l{10pt}r{10pt}){1-2} 
+        size of the pool & $\left\{2, 3, 4\right\}$\\
+        \\
+        \multicolumn{2}{c}{dense layers not output layers (type \textit{Dense})} \\
+        \cmidrule(l{10pt}r{10pt}){1-2}
+        number of nodes & $\left\{32, 64, 96\right\}$
+    \end{tabular}
+    \caption{Possible values for the hyperparameters}
+    \label{tab:hyperparameters}
+\end{table}

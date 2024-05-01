@@ -2,7 +2,7 @@
 In this section we illustrate the hypermodels that have been chosen of our classification problem (Section~\ref{hypermodels}), simplified through a visual representation of their structure. Subsequently, in Section~\ref{hyperparameter_tuning}, we describe how we have tuned the hyperparameters for each of the hypermodels.
 
 \subsection{Hypermodels}\label{hypermodels}
-For each of the neural networks we present a visual representation of the structure of the model and a description of the role of each of it's components, to understand the rational behind our choices. We call them hypermodels since in this phase we a only talking about the composition of the models, while the hyperparameters are tuned in a later stage. The first hypermodel, described in Section~\ref{hypermodel_1}, is the starting point for various adjustments added in the other hypermodels.
+For each of the neural networks we present a visual representation of the structure of the model and a description of the role of each of it's components, to understand the rational behind our choices. We call them hypermodels since in this phase we a only talking about the composition of the models, while the hyperparameters are tuned in a later stage. The \textsl{Hypermodel 1}, described in Section~\ref{hypermodel_1}, is the starting point for various adjustments added in the other hypermodels.
 
 \subsubsection{Hypermodel 1}\label{hypermodel_1}
 The first, simpler model, is composed by two convolutional layers, ideal for detecting patterns in images. Also, each of the convolutional layers is followed by a max pooling layer, with the aim of summarizing the information extracted by passing multiple kernels over the images.
@@ -12,7 +12,7 @@ After the first learning stage follows a flattening layer, that reduces the expr
 \begin{figure}[h]
     \label{fig:Hypermodel_1}
     \centering
-    \includegraphics[scale=0.5]{images/hypermodel_1.png}
+    \includegraphics[scale=0.16]{images/hypermodel_1.png}
     \caption{Structure of Hypermodel 1}
 \end{figure}
 
@@ -22,7 +22,7 @@ We have experimented by adding a dense layer as the last step in the network, to
 \begin{figure}[h]
     \label{fig:Hypermodel_2}
     \centering
-    \includegraphics[scale=0.55]{images/hypermodel_2.png}
+    \includegraphics[scale=0.17]{images/hypermodel_2.png}
     \caption{Structure of Hypermodel 2}
 \end{figure}
 
@@ -34,105 +34,40 @@ To assure that all possible combinations of the hyperparameter values would be v
 \begin{figure}[!]
     \label{fig:Hypermodel_3}
     \centering
-    \includegraphics[scale=0.5]{images/hypermodel_3.png}
+    \includegraphics[scale=0.17]{images/hypermodel_3.png}
     \caption{Structure of Hypermodel 3}
 \end{figure}
 
 \subsubsection{Hypermodel 4}\label{hypermodel_4}
-Lastly, we were curious to see the both the additions to the first hypermodel applied together.
+Lastly, we were curious to see both the additions to Hypermodel 1 applied together.
 
 \begin{figure}[!]
     \label{fig:Hypermodel_4}
     \centering
-    \includegraphics[scale=0.55]{images/hypermodel_4.png}
+    \includegraphics[scale=0.17]{images/hypermodel_4.png}
     \caption{Structure of Hypermodel 4}
 \end{figure}
 
 \subsection{Hyperparameter tuning}\label{hyperparameter_tuning}
 After having outlined the structure of the neural networks we have chosen the hyperparameters for each layer. Specifically we were looking to choose the number of filters in the convolutional layers, the size of the kernels, the size of the pool in the max pooling layers, and the number of nodes in the dense layers. The possible hyperparameters we have chosen to tune are listed in Table~\ref{tab:hyperparameters}.
 
-\begin{table}[h]
-    \centering
-    \begin{tabular}{ll}
-        \textbf{hyperparameter} & \textbf{values}\\
-        \midrule
-        \\
-        \multicolumn{2}{c}{convolutional layers (type \textit{Conv2D})} \\
-        \cmidrule(l{10pt}r{10pt}){1-2} 
-        number of filters & $\left\{16, 32, 64\right\}$ \\
-        size of the kernels (square in shape) & $\left\{3, 4, 5\right\}$\\
-        \\
-        \multicolumn{2}{c}{max pooling layers (type \textit{MaxPooling2D})
-        } \\
-        \cmidrule(l{10pt}r{10pt}){1-2} 
-        size of the pool & $\left\{2, 3, 4\right\}$\\
-        \\
-        \multicolumn{2}{c}{dense layers not output layers (type \textit{Dense})} \\
-        \cmidrule(l{10pt}r{10pt}){1-2}
-        number of nodes & $\left\{32, 64, 96\right\}$
-    \end{tabular}
-    \caption{Possible values of the hyperparameters}
-    \label{tab:hyperparameters}
-\end{table}
-
+\input{tex/tables/hyperparameterValues}
    
 To do this we use the \textit{keras\_tuner} library \cite{omalley2019kerastuner}, to carry out hyperparameter tuning. It allows to build a \textit{Tuner} object based on a compiled Keras model that has as argument a \textit{Hyperparameter} object. Such a tuner can then search for the best possible hyperparameters for the model and value domains that have been supplied. 
 
 For efficiency reasons we have opted for a random search in the hyperparameter space, in fact we have carried out only $200$ trials, so only a portion of the combinations of hyperparameters has been be evaluated. Also, with have limited the number of training epochs to 10.
 
-During the tuning process we have adopted two different approaches. In the first case we have trained the models with a given set of hyperparameters using the original training set. In the second case, to avoid having hyperparameters too dependent on the dataset we have used an augmented version of the training set. Specifically, we have applied a random alteration to each of the images in each epoch of training according to the possible transformations described in Table~\ref{tab:dataAugmentation}. For each of the two methods we have trained the models with a certain set of hyperparameters with respect to the binary cross-entropy loss. We have then chosen the best hyperparameters measured against the accuracy of the validation set, that has been observed to be at least $0.85$. 
+During the tuning process we have adopted two different approaches, listed below. 
+\begin{description}
+    \item[Without data augmentation]  In the first case we have trained the models with a given set of hyperparameters using the original training set.
+    \item[With data augmentation]  Secondly, to avoid having hyperparameters too dependent on the dataset we have used an augmented version of the training set. Specifically, we have applied a random alteration to each of the images in each epoch of training according to the possible transformations described in Table~\ref{tab:dataAugmentation}.
+\end{description}
 
-We display the selected hyperparameters of each of the hypermodels in Tables~\ref{tab:chosenHyperparameters}\subref{tab:chosenHyperparameters_tuners} and~\ref{tab:chosenHyperparameters}\subref{tab:chosenHyperparameters_tuners_augmented}.
+For each of the two methods we have trained the models with a certain set of hyperparameters with respect to the binary cross-entropy loss. We have then chosen the best hyperparameters measured against the accuracy of the validation set, that has been observed to be at least $0.85$. 
 
+We display the selected hyperparameters for each of the hypermodels in Tables~\ref{tab:chosenHyperparameters}\subref{tab:chosenHyperparameters_tuners} and~\ref{tab:chosenHyperparameters}\subref{tab:chosenHyperparameters_tuners_augmented}. From here on we call the models obtained by setting the hyperparameters according to the best values extracted by training on the original dataset and the augmented one, respectively, \textsl{Model 1} to \textsl{Model 4} and \textsl{Model\_aug 3} to \textsl{Model\_aug 4}.
 
-
-
-
-\begin{table}
-    \begin{subtable}{\textwidth}\
-        \centering
-        \begin{tabular}{lcccc}
-            \small\textbf{parameter} & \textit{Hypermodel\_1} & \textit{Hypermodel\_2} & \textit{Hypermodel\_3} & \textit{Hypermodel\_4} \\
-            \midrule
-            \texttt{filters\_1}         & 32 & 16 & 64 & 16 \\
-            \texttt{kernel\_size\_1}    & 3 & 3 & 5 & 4 \\
-            \texttt{pool\_size\_1}      & 3 & 2 & 4 & 4 \\
-            \texttt{filters\_2}         & 64 & 64 & 64 & 64 \\
-            \texttt{kernel\_size\_2}    & 3 & 5 & 4 & 4 \\
-            \texttt{pool\_size\_2}      & 3 & 4 & 2 & 3 \\
-            \texttt{units}              & - & 32 & - & 64 \\
-            \textbf{filters\_3}         & - & - & 64 & 32 \\
-            \texttt{kernel\_size\_3}    & - & - & 4 & 5 \\
-            \texttt{pool\_size\_3}      & - & - & 3 & 3 \\
-        \end{tabular}
-        \subcaption{Original training set}
-        \label{tab:chosenHyperparameters_tuners}
-    \end{subtable}
-    \bigbreak
-    \bigbreak
-    \begin{subtable}{\textwidth}
-        \centering
-        \begin{tabular}{lcccc}
-            \small\textbf{parameter} & \textit{Hypermodel\_1} & \textit{Hypermodel\_2} & \textit{Hypermodel\_3} & \textit{Hypermodel\_4} \\
-            \midrule
-            \texttt{filters\_1}         & 64 & 32 & 32 & 64 \\
-            \texttt{kernel\_size\_1}    & 5 & 3 & 5 & 5 \\
-            \texttt{pool\_size\_1}      & 2 & 2 & 2 & 3 \\
-            \texttt{filters\_2}         & 64 & 64 & 32 & 64 \\
-            \texttt{kernel\_size\_2}    & 3 & 4 & 5 & 4 \\
-            \texttt{pool\_size\_2}      & 4 & 4 & 2 & 4 \\
-            \texttt{units}              & - & 64 & - & 32 \\
-            \textbf{filters\_3}         & - & - & 64 & 16 \\
-            \texttt{kernel\_size\_3}    & - & - & 5 & 4 \\
-            \texttt{pool\_size\_3}      & - & - & 3 & 3 \\
-        \end{tabular}
-        \subcaption{Augmented training set}
-        \label{tab:chosenHyperparameters_tuners_augmented}
-    \end{subtable}   
-    \caption{Chosen hyperparameters for each hypermodel}    
-    \label{tab:chosenHyperparameters}
-
-\end{table}
+\input{tex/tables/chosenHyperparameters}
 
 
 
