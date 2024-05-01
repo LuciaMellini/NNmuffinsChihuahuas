@@ -9,12 +9,16 @@ We evaluate according to both the risk estimation versions the models obtained b
 
 \subsection{Original dataset}
 In this section we look at the risk estimations found by carrying out $5$-fold cross validation on the original dataset, composed by the training, test and validation sets. 
-\subsubsection{Without data augmentation}
-We note that
 
-\subsubsection{With data augmentation}
+We note that generally the risk for the models for which the hyperparameters have been chosen based on the augmented dataset is lower than the ones obtained by training on the original dataset. This is expected, since the models have been exposed to different versions of the images in the dataset, so they are more equipped to classify new images.
+
+\paragraph{Hyperparameters chosen based on original dataset}
+In the case of the models with hyperparameters chosen by looking at the original training set the difference in quality between the various models is more evident. In particular we see that \textsl{Model 1} and \textsl{Model 3} perform slightly better. Looking back at the structure of the hypermodels (see ~\ref{hypermodels}), this indicates that the addition of a dense layer at the end of the network does not help in the classification task. We can explain this by observing that the knowledge about the images is extracted at the convolutional level, so an additional reworking of these features only adds noise to the prediction.
+Also, comparing the risk estimates for \textsl{Model 2} and \textsl{Model 4} it is made evident that the additional convolutional layer followed by a max pooling layer does not better the quality of the prediction. This is possibly due to the fact that a less complex network better at grasping the characteristic of the images, as an instance of the Occam Razor.
+
+\paragraph{Hyperparameters chosen based on augmented dataset}
+Viceversa, seen the results for the models obtained by choosing the hyperparameters based on an augmented version of the dataset, there is no clear winner. This is possibly due to the fact that the models have been exposed to a more varied dataset, so the quality of the prediction is more balanced. We note a slight advantage of \textsl{Model\_aug 2} and \textsl{Model\_aug 3}, implying that the simplest and the more complex solutions are not ideal.
+
 
 \subsection{Dataset without validation set}
-In this section we look at the risk estimations found by carrying out $5$-fold cross validation on the images in the traning and test set. 
-\subsubsection{Without data augmentation}
-\subsubsection{With data augmentation}
+In this section we look at the risk estimations found by carrying out $5$-fold cross validation on the images in the training and test set. 
