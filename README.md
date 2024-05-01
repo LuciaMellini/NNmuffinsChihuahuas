@@ -6,10 +6,19 @@ This repository contains two main files:
 * `project.ipynb` the Jupyter Notebook with all the adopted code described as necessary,
 * `report.tex` the $\LaTeX$ source code for the report of the project; this document goes into more detail about the formal aspects of the used approaches and the observed results.
 
-Also, it provides a `tuner` directory, containing precomputed hyperparameters for the proposed hypermodels. During the execution of the Jupyter Notebook, with `tuners` in the same directory, the `search` function offered by `keras_tuner` will automatically retrieve the precomputed information, reducing the computational time.
+For the rendering of the report in pdf format, refer to [release]().
+
+## Additional material
+To reduce computational efforts we provide come pre-computed results in the [release]().
+
+**Hyperparameters**   
+  To avoid computing all the trials needed to tune the hyperparameters, it is sufficient to put the directories contained in the `tuners_results.zip` directly in the DATA_PATH, that can be defined in the first code block in the `project.ipynb` notebook.
+
+  **Cross validation losses**   
+  Similarly, the pre-computed loss values contained in the json arrays provided in the `cv_losses.zip`, if put in the DATA_PATH, are loaded instead of carrying out the cross validation process.
 
 ## Prerequisites
-To be able to download the dataset it is necessary to authenticate with a Kaggle username and token<sup>[1](#fn1)</sup>. At this scope the second code block in the notebook `project.ipynb` is intended to be filled out with your personal username and key in the respective fields, like suggested below.
+To be able to download the dataset it is necessary to authenticate with a Kaggle username and token<sup>[1](#fn1)</sup>. At this scope the first code block in the `project.ipynb` notebook is intended to be filled out with your personal username and key in the respective fields, like suggested below.
 ```python
     os.environ['KAGGLE_USERNAME'] = "<USERNAME>"
     os.environ['KAGGLE_KEY'] = "<KEY>"
