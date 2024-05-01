@@ -55,7 +55,7 @@ After having outlined the structure of the neural networks we have chosen the hy
    
 To do this we use the \textit{keras\_tuner} library \cite{omalley2019kerastuner}, to carry out hyperparameter tuning. It allows to build a \textit{Tuner} object based on a compiled Keras model that has as argument a \textit{Hyperparameter} object. Such a tuner can then search for the best possible hyperparameters for the model and value domains that have been supplied. 
 
-For efficiency reasons we have opted for a random search in the hyperparameter space, in fact we have carried out only $200$ trials, so only a portion of the combinations of hyperparameters has been be evaluated. Also, with have limited the number of training epochs to 10.
+For efficiency reasons we have opted for a random search in the hyperparameter space, in fact we have carried out only $200$ trials, so only a portion of the combinations of hyperparameters has been be evaluated. Also, with have limited the number of training epochs to 10. Although the values tuned such way will not necessarily be the best, we were merely interested in having a good approximation of some good hyperparameters.
 
 During the tuning process we have adopted two different approaches, listed below. 
 \begin{description}
