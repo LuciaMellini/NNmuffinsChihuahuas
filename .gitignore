@@ -11,6 +11,7 @@
 *.toc
 
 project-checkpoint.ipynb
+*pyc
 
 *.png
 *.jpg
