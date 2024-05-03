@@ -1,13 +1,13 @@
 \section{Chosen models}\label{2_models}
-In this section we illustrate the hypermodels that have been chosen of our classification problem (Section~\ref{hypermodels}), simplified through a visual representation of their structure. Subsequently, in Section~\ref{hyperparameter_tuning}, we describe how we have tuned the hyperparameters for each of the hypermodels.
+In this section we first illustrate the hypermodels that have been chosen of our classification problem (Section~\ref{hypermodels}). Subsequently, in Section~\ref{hyperparameter_tuning}, we describe how we have tuned the hyperparameters for each of the hypermodels.
 
 \subsection{Hypermodels}\label{hypermodels}
-For each of the neural networks we present a visual representation of the structure of the model and a description of the role of each of it's components, to understand the rational behind our choices. We call them hypermodels since in this phase we a only talking about the composition of the models, while the hyperparameters are tuned in a later stage. The \textsl{Hypermodel 1}, described in Section~\ref{hypermodel_1}, is the starting point for various adjustments added in the other hypermodels.
+For each of the neural networks we present a visual representation of the structure of the model and a description of the role of each of it's components, to understand the rational behind our choices. We call them hypermodels since in this phase we are only talking about the composition of the models, while the hyperparameters are tuned in a later stage. \textsl{Hypermodel 1}, described in Section~\ref{hypermodel_1}, is the starting point for various adjustments added in the other hypermodels.
 
 \subsubsection{Hypermodel 1}\label{hypermodel_1}
 The first, simpler model, is composed by two convolutional layers, ideal for detecting patterns in images. Also, each of the convolutional layers is followed by a max pooling layer, with the aim of summarizing the information extracted by passing multiple kernels over the images.
 
-After the first learning stage follows a flattening layer, that reduces the expressivity of the foundings, and also simplifies the task left for the next step. Finally, the last output layer is designed to summarize this information into a unique value in the interval $\left[0,1\right]$.
+After the first learning stage follows a flattening layer, that reduces the expressivity of the foundings, and also simplifies the task left for the next step. Finally, the output layer is designed to summarize this information into a unique value in the interval $\left[0,1\right]$.
 
 \begin{figure}[h]
     \label{fig:Hypermodel_1}
@@ -54,19 +54,21 @@ After having outlined the structure of the neural networks we have chosen the hy
 
 \input{tex/tables/hyperparameterValues}
    
-To do this we use the \textit{keras\_tuner} library \cite{omalley2019kerastuner}, to carry out hyperparameter tuning. It allows to build a \textit{Tuner} object based on a compiled Keras model that has as argument a \textit{Hyperparameter} object. Such a tuner can then search for the best possible hyperparameters for the model and value domains that have been supplied. 
+To carry out hyperparameter tuning we have used the \textit{keras\_tuner} library \cite{omalley2019kerastuner}. It allows to build a \textit{Tuner} object based on a compiled Keras model that has as argument a \textit{Hyperparameter} object. Such a tuner can then search for the best possible hyperparameters for the model and value domains that have been supplied. 
 
-For efficiency reasons we have opted for a random search in the hyperparameter space, in fact we have carried out only $200$ trials, so only a portion of the combinations of hyperparameters has been be evaluated. Also, with have limited the number of training epochs to 10. Although the values tuned such way will not necessarily be the best, we were merely interested in having a good approximation of some good hyperparameters.
+For efficiency reasons we have opted for a random search in the hyperparameter space, in fact we have carried out only $200$ trials, so only a portion of the combinations of hyperparameters has been evaluated. Also, we have limited the number of training epochs to 10. Although the values tuned such way will not necessarily be the best, we were merely interested in having a good approximation of good hyperparameters to concentrate our analysis on the quality of the models themselves.
 
 During the tuning process we have adopted two different approaches, listed below. 
 \begin{description}
     \item[Without data augmentation]  In the first case we have trained the models with a given set of hyperparameters using the original training set.
-    \item[With data augmentation]  Secondly, to avoid having hyperparameters too dependent on the dataset we have used an augmented version of the training set. Specifically, we have applied a random alteration to each of the images in each epoch of training according to the possible transformations described in Table~\ref{tab:dataAugmentation}.
+    \item[With data augmentation]  Secondly, to avoid having hyperparameters too dependent on the dataset, we have used an augmented version of the training set. Specifically, we have applied random alterations  to each of the images in each epoch of training according to the possible transformations described in Table~\ref{tab:dataAugmentation}.
 \end{description}
 
-For each of the two methods we have trained the models with a certain set of hyperparameters with respect to the binary cross-entropy loss. We have then chosen the best hyperparameters measured against the accuracy of the validation set, that has been observed to be at least $0.85$. 
+For each of the two methods we have trained the models with a certain set of hyperparameters with respect to the binary cross-entropy loss. We have then chosen the best hyperparameters measured against the accuracy of the validation set, that has been observed to be at least $0.86$ for the best models we have achieved. 
 
-We display the selected hyperparameters for each of the hypermodels in Tables~\ref{tab:chosenHyperparameters}\subref{tab:chosenHyperparameters_tuners} and~\ref{tab:chosenHyperparameters}\subref{tab:chosenHyperparameters_tuners_augmented}. From here on we call the models obtained by setting the hyperparameters according to the best values extracted by training on the original dataset and the augmented one, respectively, \textsl{Model 1} to \textsl{Model 4} and \textsl{Model\_aug 3} to \textsl{Model\_aug 4}.
+We display the selected hyperparameters for each of the hypermodels in Tables~\ref{tab:chosenHyperparameters}\subref{tab:chosenHyperparameters_tuners} and~\ref{tab:chosenHyperparameters}\subref{tab:chosenHyperparameters_tuners_augmented}. From here on we call the models obtained by setting the hyperparameters according to the best values extracted by training on the original dataset and the augmented one, respectively, \textsl{Model 1} to \textsl{Model 4} and \textsl{Model\_aug 1} to \textsl{Model\_aug 4}. 
+
+We observe that the kernel size tends not to increase in subsequent convolutional layers. This is due to the fact that the first layers are responsible for detecting simple patterns, while the latter ones are responsible for detecting more complex patterns. Also, the number of units is never too high, to avoid overfitting, and probably because the first stages in the networks do not extract complex information from the images.
 
 \input{tex/tables/chosenHyperparameters}
 

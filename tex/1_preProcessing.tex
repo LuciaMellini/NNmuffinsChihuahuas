@@ -1,14 +1,14 @@
 \section{Data pre-processing}\label{1_preProcessing}
-In this section we list the pre-processing pipeline that has been applied to the training and test set already supplied by Kaggle.
+In this section we list the pre-processing pipeline that has been applied to the dataset supplied by Kaggle.
 
 \paragraph{Remove badly encoded images}
-We remove all the images that are badly encoded. We do this by simply trying to open the image and verifying that the file is not broken. At this scope we have used the \texttt{verify} method of the \texttt{Image} object made available by the \texttt{PIL}(Python Imaging Library) package. Citing  this method attempts to determine if the file is broken, without actually decoding the image data. If this method finds any problems, it raises suitable exceptions\cite{PILImageverify}.
+We remove all the images that are badly encoded. We do this by simply trying to open the image and verifying that the file is not broken. At this scope we have used the \texttt{verify} method of the \textit{Image} object made available by the \textit{PIL} (Python Imaging Library) package. This method attempts to determine if the file is broken, without actually decoding the image data. If this method finds any problems, it raises suitable exceptions\cite{PILImageverify}.
 
 \paragraph{Simplifying the image samples}
-To make training easier and more efficient we have considered the images in grayscale instead of RGB, so reducing the number of channels that describe a sample from 3 to 1. For the same reason we have reduced the dimensions of all pictures by rescaling them to the size $\left(64,64\right)$. This size has been chosen to balance the need of having a good resolution to recognize the digits and the need of having a small size to make the training process faster. We have chosen to apply these modifications to the training set and the test set instead of inserting this step at the beginning of the training process to avoid a computational overhead during model execution.
+To make training easier and more efficient we have considered the images in grayscale instead of RGB, so reducing the number of channels that describe a sample from 3 to 1. For the same reason we have reduced the dimensions of all pictures by rescaling them to the size $\left(64,64\right)$. This size has been chosen to balance the need of having a good resolution to recognize the digits and the need of having a small size to make the training process faster. We have chosen to apply these modifications to the dataset beforehand instead of inserting this step at the beginning of the training and testing process to avoid a computational overhead.
 
 \paragraph{Data augmentation}
-To make the dataset more expressive we have applied random changes to the images to reduce overfitting when choosing the hyperparameters for the models. In particular, we apply the transformations listed in Table~\ref{tab:dataAugmentation}.
+To make the dataset more expressive in the stage described in Section~\ref{hyperparameter_tuning} we have applied random changes to the images to reduce overfitting when choosing the hyperparameters for the models. In particular, we apply the transformations listed in Table~\ref{tab:dataAugmentation}.
 
 \begin{table}[h]
     \centering
@@ -29,9 +29,11 @@ To make the dataset more expressive we have applied random changes to the images
 As one can notice the images are altered slightly, and in realistic ways, e.g. a picture of an upside down dog would not make much sense.
 
 \subsection{Partitioning of the dataset}
-We have assumed that the order of the samples in the dataset was arbitrary. So, we have relied on the subdivision provided by Kaggle into training and test set, with $\frac{1}{5}$ of the images assigned to the test set. We have chosen to further partition the training set into an actual training set and a validation set, used to tune the hyperparameters for the proposed hypermodels. So, we have partitioned the images in three groups as follows:
-\begin{description}
-    \item[training set] $70\%$ of the samples,
-    \item[validation set] $10\%$ of the samples,  
-    \item[test set] $20\%$ of the samples. 
-\end{description}
+We have assumed that the order of the samples in the dataset was arbitrary. So, we have relied on the subdivision provided by Kaggle into training and test set, with $\frac{1}{5}$ of the images assigned to the test set. We have chosen to further partition the training set into the adopted training set and a validation set, used to tune the hyperparameters for the proposed hypermodels. So, we have partitioned the images in three groups as follows:
+
+\begin{itemize}
+    \centering
+    \item[\textbf{training set}]  $70\%$ of the samples,
+    \item[\textbf{validation set}]  $10\%$ of the samples,  
+    \item[\textbf{test set}] $20\%$ of the samples. 
+\end{itemize}

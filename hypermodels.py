@@ -17,9 +17,6 @@ class HyperModel_1(kt.HyperModel):
     """
 
     def __init__(self, input_shape: tuple[int, int, int]):
-        """
-        Initializes the hypermodel.
-        """
         self.input_shape = input_shape
 
     def build(self, hp: kt.HyperParameters) -> keras.Model:
@@ -61,9 +58,6 @@ class HyperModel_2(kt.HyperModel):
 
     """
     def __init__(self, input_shape: tuple[int, int]):
-        """
-        Initializes the hypermodel.
-        """
         self.input_shape = input_shape
 
     def build(self, hp:kt.HyperParameters) -> keras.Model:
@@ -106,9 +100,6 @@ class HyperModel_3(kt.HyperModel):
 
     """
     def __init__(self, input_shape: tuple[int, int]):
-        """
-        Initializes the hypermodel.
-        """
         self.input_shape = input_shape
 
     def build(self, hp: kt.HyperParameters) -> keras.Model:
@@ -153,9 +144,6 @@ class HyperModel_4(kt.HyperModel):
     """
    
     def __init__(self, input_shape: tuple[int, int]):
-        """
-        Initializes the hypermodel.
-        """
         self.input_shape = input_shape
 
     def build(self, hp: kt.HyperParameters) -> keras.Model:
