@@ -189,7 +189,7 @@ def tuners_display_metrics(tuners: dict[str: kt.Tuner], hypermodels: dict[str: k
     best_metrics = {}
     for hypermodel_name in hypermodels:
         best_metrics[hypermodel_name] = tuners[hypermodel_name].oracle.get_best_trials(1)[0].score
-    print(pd.DataFrame({ k:[v] for (k,v) in best_metrics.items()}, index = ["loss"]))
+    print(pd.DataFrame({ k:[v] for (k,v) in best_metrics.items()}, index = ["val_accuracy"]))
     
     
 def get_best_models(tuners: dict[str: kt.Tuner], hypermodels: dict[str: kt.HyperModel]) -> dict[str: keras.Model]:
