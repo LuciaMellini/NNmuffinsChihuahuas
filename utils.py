@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from PIL import Image
-import kerastuner as kt
+import keras_tuner as kt
 from sklearn.metrics import zero_one_loss
 from sklearn.model_selection import KFold
 import keras
@@ -102,7 +102,7 @@ def resize_image(image:tf.Tensor, target_size: tuple) -> tf.Tensor:
     return resized_image
 
 
-def display_hypermodel(hypermodel: kt.HyperModel) -> None:
+def display_hypermodel(hypermodel: kt.HyperModel, hypermodel_name: str) -> None:
     """
     Displays the architecture of a hypermodel.
 
@@ -113,7 +113,7 @@ def display_hypermodel(hypermodel: kt.HyperModel) -> None:
         None
     """
     built_hypermodel = hypermodel.build(kt.HyperParameters())
-    return keras.utils.plot_model(built_hypermodel, show_layer_names=True)
+    return keras.utils.plot_model(built_hypermodel, show_layer_names=True, to_file=f"{hypermodel_name}.png", dpi=300)
 
 
 def tune_hypermodel(model_name: str, hypermodel: kt.HyperModel, train_ds: tf.data.Dataset, val_ds: tf.data.Dataset, directory: str, max_trials: int) -> kt.Tuner:
